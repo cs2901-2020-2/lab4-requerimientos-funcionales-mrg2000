@@ -7,20 +7,28 @@ public class  DNASequencer {
 
     static final Logger logger = Logger.getLogger(DNASequencer.class.getName());
     
-    public String dnaSequenceCalculator(List<String> subsequences) {
+    public DNASequencer() { 
+	}
+
+    public String calculate(List<String> parts) throws MaxNumberOfSubsequencesException, SubSequenceLengthException {
         StringBuilder dnaSequence = new StringBuilder();
-        dnaSequence.append(subsequences.get(0));
-        int totalOfSubsequences = subsequences.size();
+        dnaSequence.append(parts.get(0));
+        int totalOfSubsequences = parts.size();
         int currentNumberOfSubsequence = 1;
 
-        if(totalOfSubsequences == 1){
-            return dnaSequence.toString();
+        if(parts.size() > 160000){
+            throw new MaxNumberOfSubsequencesException("Mas de 160K subsecuencias");
         }
-
+        for(int i = 0; i <parts.size(); i++){
+            if(parts.get(i).length() > 200){
+                throw new SubSequenceLengthException("Mas de 200 caracteres");
+            }
+        }
         while(currentNumberOfSubsequence < totalOfSubsequences){
-            String currentSubsequence = subsequences.get(currentNumberOfSubsequence);
+            String currentSubsequence = parts.get(currentNumberOfSubsequence);
             StringBuilder subsequenceChars = new StringBuilder();
             int currentSubsequenceSize = currentSubsequence.length();
+
             for(int j=0; j < currentSubsequenceSize; j++){
                 char e = currentSubsequence.charAt(j);
                 String eToString = Character.toString(e);
@@ -33,9 +41,5 @@ public class  DNASequencer {
             currentNumberOfSubsequence++;
         }
         return dnaSequence.toString();
-	}
-
-    public String calculate(List<String> part){
-        return dnaSequenceCalculator(part);
     }
 }

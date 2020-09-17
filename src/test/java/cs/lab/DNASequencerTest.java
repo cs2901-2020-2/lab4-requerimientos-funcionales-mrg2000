@@ -7,15 +7,34 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.io.FileWriter;
+import java.util.logging.Logger;
 
 @Test
 public class DNASequencerTest {
 
-    public void testCase0() throws IOException {
+    static final Logger logger = Logger.getLogger(DNASequencer.class.getName());
+
+    @Test
+    public void testCase0() throws Exception {
+        generic(0);
+    }
+    @Test (expectedExceptions = MaxNumberOfSubsequencesException.class)
+    public void testCase1() throws Exception {
+        generic(1);
+    }
+    @Test (expectedExceptions = SubSequenceLengthException.class)
+    public void testCase2() throws Exception {
+        List<String> input = readInput(2);
+        DNASequencer sequencer = new DNASequencer();
+        String response = sequencer.calculate(input);
+    }
+    @Test(invocationCount = 50, threadPoolSize = 50)
+    public void testCase3() throws Exception {
         generic(0);
     }
 
-    private void generic(int i) throws IOException {
+    private void generic(int i) throws Exception {
         List<String> input = readInput(i);
         String output = readOutput(i);
         DNASequencer sequencer = new DNASequencer();
