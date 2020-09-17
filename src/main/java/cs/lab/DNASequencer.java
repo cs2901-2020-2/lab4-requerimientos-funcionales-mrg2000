@@ -7,7 +7,8 @@ public class  DNASequencer {
 
     static final Logger logger = Logger.getLogger(DNASequencer.class.getName());
     
-    public DNASequencer() { 
+    public DNASequencer(){
+        logger.info("DNASequencer construido correctamente.");
 	}
 
     public String calculate(List<String> parts) throws MaxNumberOfSubsequencesException, SubSequenceLengthException {
