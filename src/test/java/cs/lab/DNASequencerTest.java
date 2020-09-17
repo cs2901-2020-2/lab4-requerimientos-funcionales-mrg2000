@@ -31,7 +31,12 @@ public class DNASequencerTest {
     }
     @Test(invocationCount = 50, threadPoolSize = 50)
     public void testCase3() throws Exception {
+        long begginTime = System.currentTimeMillis();
+        long maxExecutionTime = 100;
         generic(0);
+        long finalTime = System.currentTimeMillis();
+        long executionTime = finalTime - begginTime;
+        Assert.assertTrue(executionTime < maxExecutionTime);
     }
 
     private void generic(int i) throws Exception {
