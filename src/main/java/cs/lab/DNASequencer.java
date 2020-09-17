@@ -7,14 +7,14 @@ public class  DNASequencer {
 
     static final Logger logger = Logger.getLogger(DNASequencer.class.getName());
     
-    public String DNASequencer(List<String> subsequences) {
-        StringBuilder LCB = new StringBuilder();
-        LCB.append(subsequences.get(0));
+    public String dnaSequenceCalculator(List<String> subsequences) {
+        StringBuilder dnaSequence = new StringBuilder();
+        dnaSequence.append(subsequences.get(0));
         int totalOfSubsequences = subsequences.size();
         int currentNumberOfSubsequence = 1;
 
         if(totalOfSubsequences == 1){
-            return LCB.toString();
+            return dnaSequence.toString();
         }
 
         while(currentNumberOfSubsequence < totalOfSubsequences){
@@ -26,17 +26,16 @@ public class  DNASequencer {
                 String eToString = Character.toString(e);
                 subsequenceChars.append(eToString);
 
-                if(!(LCB.toString()).contains(subsequenceChars)){
-                    LCB.append(eToString);
+                if(!(dnaSequence.toString()).contains(subsequenceChars)){
+                    dnaSequence.append(eToString);
                 }
             }
             currentNumberOfSubsequence++;
         }
-        return LCB.toString();
+        return dnaSequence.toString();
 	}
 
     public String calculate(List<String> part){
-        String LCB = DNASequencer(part);
-        return LCB;
+        return dnaSequenceCalculator(part);
     }
 }
